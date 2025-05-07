@@ -1,0 +1,53 @@
+services:
+  student_postgres:
+    image: postgres:15
+    container_name: student_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: student_analytics_db
+    volumes:
+      - ../db:/data
+      - pgdata:/var/lib/postgresql/data
+      - ../db/init:/docker-entrypoint-initdb.d
+
+  student_pgadmin:
+    image: dpage/pgadmin4
+    container_name: student_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - student_postgres
+
+  student_xrdp:
+    image: danielguerra/ubuntu-xrdp:20.04
+    container_name: student_xrdp
+    ports:
+      - "3390:3389"
+    volumes:
+      - pgdata:/home/ubuntu
+
+  student_dash:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.dash
+    container_name: student_dash
+    ports:
+      - "8050:8050"
+    volumes:
+      - ./app.py:/app/app.py
+      - ./requirements.txt:/app/requirements.txt
+    depends_on:
+      - student_postgres
+    environment:
+      - DASH_DEBUG_MODE=True
+      - DATABASE_URL=postgresql+psycopg2://postgres:postgres@student_postgres:5432/student_analytics_db
+
+volumes:
+  pgdata:

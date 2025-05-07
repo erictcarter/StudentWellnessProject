@@ -1,0 +1,90 @@
+# Create a well-normalized ERD layout as a text-based representation
+erd_normalized = """
+Entity: student
+  - student_id (PK)
+  - inter_dom
+  - region
+  - gender
+  - academic
+  - age
+  - age_cate
+  - stay
+  - stay_cate
+  - religion
+  - suicide
+  - dep
+  - deptype
+  - depsev
+
+Entity: language_proficiency
+  - student_id (PK, FK -> student.student_id)
+  - japanese
+  - japanese_cate
+  - english
+  - english_cate
+
+Entity: mental_health_score
+  - student_id (PK, FK -> student.student_id)
+  - todep
+  - tosc
+  - toas
+
+Entity: support_sources
+  - student_id (PK, FK -> student.student_id)
+  - partner
+  - friends
+  - parents
+  - relative
+  - profess
+  - phone
+  - doctor
+  - reli
+  - alone
+  - others
+  - internet
+
+Entity: support_binaries
+  - student_id (PK, FK -> student.student_id)
+  - partner_bi
+  - friends_bi
+  - parents_bi
+  - relative_bi
+  - professional_bi
+  - phone_bi
+  - doctor_bi
+  - religion_bi
+  - alone_bi
+  - others_bi
+  - internet_bi
+
+Entity: student_performance
+  - perf_id (PK)
+  - student_id (FK -> student.student_id)
+  - hours_studied
+  - attendance
+  - parental_involvement
+  - access_to_resources
+  - extracurricular_activities
+  - sleep_hours
+  - previous_scores
+  - motivation_level
+  - internet_access
+  - tutoring_sessions
+  - family_income
+  - teacher_quality
+  - school_type
+  - peer_influence
+  - physical_activity
+  - learning_disabilities
+  - parental_education_level
+  - distance_from_home
+  - gender
+  - exam_score
+"""
+
+# Save this as a file for easier copy or visualization
+erd_file_path = "/mnt/data/ERD_Normalized_Schema.txt"
+with open(erd_file_path, "w") as f:
+    f.write(erd_normalized)
+
+erd_file_path
