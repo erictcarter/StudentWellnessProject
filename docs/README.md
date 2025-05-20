@@ -1,18 +1,16 @@
-Thanks for the clarification. Here's a **refactored, world-class README** that reflects the tone, clarity, and structure you’d expect from senior data engineers at **Meta or Apple** — minimal, precise, system-oriented, and deeply modular:
 
----
 
 # 🎓 Student Wellness Analytics Dashboard
 
 **A Reproducible Platform for Integrating Academic and Mental Health Signals**
 
----
+
 
 ## 🔍 Overview
 
 This project delivers a structured, SQL-centric analytics pipeline designed to analyze relationships between student performance and mental health. It is fully containerized, modular, and built for reproducibility and transparency across ingestion, transformation, modeling, and visualization layers.
 
----
+
 
 ## 🎯 Goals
 
